@@ -1,0 +1,43 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 10px; 
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid black;
+}
+
+.cart-button {
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 5px 15px;
+}
+
+.goods-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goods-item {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgb(163, 161, 161);
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
