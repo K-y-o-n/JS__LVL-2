@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamburger</title>
+</head>
+
+<body>
+  <script>
+    // 3* Некая сеть фастфуда предлагает несколько видов гамбургеров:
+    // ### Маленький (50 рублей, 20 калорий).
+    // ### Большой (100 рублей, 40 калорий). ### Гамбургер может быть с одним из нескольких видов начинок (обязательно):
+    // ### С сыром (+10 рублей, +20 калорий).
+    // ### С салатом (+20 рублей, +5 калорий).
+    // ### С картофелем (+15 рублей, +10 калорий). 
+    // ### Дополнительно гамбургер можно посыпать приправой (+15 рублей, +0 калорий) и полить майонезом (+20 рублей, +5 калорий). 
+    // ### Напишите программу, рассчитывающую стоимость и калорийность гамбургера. Можно использовать примерную архитектуру класса из методички, но можно использовать и свою.
+
+    class Hamburger {
+      constructor(size, stuffing) {
+        this.size = this.#size.find(elem => elem.name === size);
+        this.stuffing = this.#stuffing.find(elem => elem.name === stuffing);
+        this.topping = [];
+      }
+
+      #size = [
+        { name: "small", price: 50, cal: 20 },
+        { name: "big", price: 100, cal: 40 }
+      ]
+      #stuffing = [
+        { name: "cheese", price: 10, cal: 20 },
+        { name: "salad", price: 20, cal: 5 },
+        { name: "potato", price: 10, cal: 10 }
+      ]
+      #topping = [
+        { name: "spice", price: 15, cal: 0 },
+        { name: "mayo", price: 20, cal: 5 }
+      ]
+
+      addTopping(topping) {
+        if (this.topping.find(elem => elem.name === topping)) return "Такая начинка уже добалена!";
+
+        if (topping === "spice") this.topping.push(this.#topping[0]);
+        else if (topping === "mayo") this.topping.push(this.#topping[1]);
+      }
+
+      removeTopping(topping) {
+        if (this.topping.find(elem => elem.name === topping)) {
+          let index = this.topping.findIndex(elem => elem.name === topping);
+          this.topping.splice(index, 1);
+        }
+      }
+
+      getToppings() {
+        this.#topping.forEach(elem => console.log(`${elem.name}: цена ${elem.price} рублей, калорийность ${elem.cal}.`));
+      }
+
+      getSize() {
+        console.log(this.size.name);
+      }
+
+      getStuffing() {
+        console.log(this.stuffing.name);
+      }
+
+      calculatePrice() {
+        let price = this.size.price + this.stuffing.price + this.topping.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0);
+        console.log(`Сумма заказа: ${price} рублей.`);
+      }
+
+      calculateCalories() {
+        let cal = this.size.cal + this.stuffing.cal + this.topping.reduce((accumulator, currentValue) => accumulator + currentValue.cal, 0);
+        console.log(`Калорийность заказа: ${cal} калорий.`);
+      }
+    }
+
+    let hamburger = new Hamburger("big", "cheese");
+
+    hamburger.addTopping("mayo");
+    hamburger.calculatePrice();
+    hamburger.calculateCalories();
+  </script>
+</body>
+
+</html>
