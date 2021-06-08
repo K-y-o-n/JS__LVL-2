@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регулярные выражения</title>
+  <style>
+    :active,
+    :hover,
+    :focus {
+      outline: 0;
+      outline-offset: 0;
+    }
+
+    .form {
+      margin-bottom: 100px;
+    }
+
+    .textarea {
+      resize: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. Дан большой текст, в котором для оформления прямой речи используются одинарные кавычки. Придумать шаблон, который заменяет одинарные кавычки на двойные.
+    2. Улучшить шаблон так, чтобы в конструкциях типа aren't одинарная кавычка не заменялась на двойную.
+    3. *Создать форму обратной связи с полями: Имя, Телефон, E-mail, текст, кнопка Отправить. При нажатии на кнопку Отправить произвести валидацию полей следующим образом:
+    a. Имя содержит только буквы.
+    b. Телефон имеет вид +7(000)000-0000.
+    c. E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+    d. Текст произвольный.
+    e. Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой и сообщить пользователю об ошибке. -->
+
+  <form action="" class="form">
+    <label for="name">Имя
+      <input type="text" name="name" class="name" placeholder="Имя">
+    </label>
+    <br>
+    <br>
+    <label for="tel">Телефон
+      <input type="tel" name="tel" class="tel" required placeholder="+7(000)000-0000">
+      <br>
+      <br>
+    </label>
+    <label for="email">Почта
+      <input type="email" name="email" class="email" required placeholder="email">
+      <br>
+      <br>
+    </label>
+    <label for="text">Ваше сообщение</br>
+      <textarea name="text" class="textarea" cols="25" rows="5" required placeholder="Text"></textarea>
+      <br>
+    </label>
+    <button type="submit" class="btn">Отправить</button>
+  </form>
+
+  <script>
+
+    // 1 и 2 задание
+    let text = "Mary asked Steve, `You are a teacher, aren`t you?`" + "<br>" + "`No, I'm not a teacher`, Steve replied, `Actually I'm a translator`";
+
+    let regExp = /(\B`)|(`\B)/g;
+
+    let newText = text.replace(regExp, `"`);
+
+    document.write(newText);
+
+
+    // 3 задание
+    let btn = document.querySelector(".btn");
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+
+      let inputArr = document.querySelectorAll("input");
+      let [name, tel, email] = inputArr; //деструктуризаця массива
+      let text = document.querySelector(".textarea");
+
+      let check = 0;
+
+      if (!/^([А-Я][а-яё]+)|([A-Z][a-z]+)$/.test(name.value)) {
+        name.style = "border: 5px solid red";
+        check++;
+      } else {
+        name.style = "border: 1px solid black";
+      }
+
+      if (!/^((\+7)|8)\(\d{3}\)\d{3}\-\d{4}$/.test(tel.value)) {
+        tel.style = "border: 5px solid red";
+        check++;
+      } else {
+        tel.style = "border: 1px solid black";
+      }
+
+      if (!/^[a-z]+(\.|\-)?[a-z]+\@[a-z]{4,6}\.[a-z]{2,3}$/.test(email.value)) {
+        email.style = "border: 5px solid red";
+        check++;
+      } else {
+        email.style = "border: 1px solid black";
+      }
+
+      if (!/\w+/.test(text.value)) {
+        text.style = "border: 5px solid red";
+        check++;
+      } else {
+        text.style = "border: 1px solid black";
+      }
+
+      if (check > 0) setTimeout(() => alert("Неверно заполнены поля выделенные красным"), 0);
+    })
+
+  </script>
+</body>
+
+</html>

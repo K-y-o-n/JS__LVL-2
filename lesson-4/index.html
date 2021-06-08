@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eShop</title>
+  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <!-- 
+    Сделаем для нашего списка товаров регистронезависимый поиск.
+  -->
+
+  <div class="container">
+    <header class="header">
+      <input type="text" class="goods-search" />
+      <button class="search-button" type="button"></button>
+      <button class="cart-button" type="button">Корзина</button>
+    </header>
+    <main>
+      <div class="goods-list"></div>
+      <div class="basket">
+        <p class="basket-list__total">Корзина пуста</p>
+        <div class="basket-list">
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
