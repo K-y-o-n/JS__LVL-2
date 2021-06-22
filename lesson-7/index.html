@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eShop</title>
+  <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- 
+    1. Привязать добавление товара в корзину к реальному API.
+    2. Добавить API для удаления товара из корзины.
+    3. *Добавить файл stats.json, в котором будет храниться статистика действий пользователя с корзиной. В файле должны быть поля с названием действия (добавлено/удалено), названием товара, с которым производилось действие и временем, когда оно было совершено.
+  -->
+
+  <div id="app">
+    <div class="container">
+      <header class="header">
+        <div class="logo">eShop</div>
+        <goods-search :search="searchLine" :filter="filterGoods"></goods-search>
+        <button class="cart-button" type="button" @click="isVisibleCart=!isVisibleCart">Корзина</button>
+      </header>
+      <main>
+        <goods-list :goods="filteredGoods"></goods-list>
+        <empty-goods-list :goods="filteredGoods"></empty-goods-list>
+        <cart-list :goods="cartGoods" :total="cartTotalPrice" :visible="isVisibleCart" :remove="removeFromCart">
+        </cart-list>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
