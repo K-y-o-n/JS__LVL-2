@@ -119,7 +119,7 @@ const app = new Vue({
     // удаление товара из корзины
     removeFromCart(good) {
       // this.cartGoods = [...this.cartGoods.slice(0, index), ...this.cartGoods.slice(index + 1)]
-      let remove = this.postData('/removeFromCart', good);
+      let remove = this.sendData('/removeFromCart', good);
       remove.then(object => {
         this.cartGoods = object;
       })

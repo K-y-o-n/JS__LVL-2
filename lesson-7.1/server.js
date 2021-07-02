@@ -54,17 +54,17 @@ app.post('/addToCart', (req, res) => {
 app.post('/removeFromCart', (req, res) => {
   fs.readFile('cart.json', 'utf8', (err, data) => {
     if (err) {
-      res.send('{"result": 0}');
+      res.send('{"result": error}');
     } else {
-      const cart = JSON.parse(data);
-      const item = req.body;
-      let index = cart.findIndex(item);
-      newCart = [...cart.slice(0, index), ...cart.slice(index + 1)]
+      let cart = JSON.parse(data);
+      let item = req.body;
+      let index = cart.findIndex(el => el == item);
+      cart = [...cart.slice(0, index), ...cart.slice(index + 1)]
 
 
-      fs.writeFile('cart.json', JSON.stringify(newCart), (err) => {
+      fs.writeFile('cart.json', JSON.stringify(cart), (err) => {
         if (err) {
-          res.send('{"result": 0}');
+          res.send('{"result": error}');
         } else {
           fs.readFile('cart.json', 'utf8', (err, data) => {
             if (err) {
