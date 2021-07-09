@@ -1,0 +1,17 @@
+{
+  "name": "lesson-7",
+  "version": "1.0.0",
+  "description": "lesson-7",
+  "main": "script.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "webpack -w"
+  },
+  "author": "",
+  "license": "ISC"
+}
